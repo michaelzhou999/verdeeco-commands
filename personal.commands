@@ -1,0 +1,27 @@
+# create private/public key pair - upload the public key to github
+ssh-keygen -t rsa
+
+# clone verdeeco core code under /opt/verdeeco/sys/core/current directory
+cd /opt/verdeeco/sys/core
+git clone git@github.com:verdeeco/core.git current
+
+# more installation based on workspace
+cd current
+npm install
+./node_modules/bower/bin/bower install
+
+# environment
+source etc/verdeeco.env
+
+# play framework dependencies
+play deps --sync
+
+# database migrations
+./bin/create_db.sh verdeeco_core_dev localhost
+cp conf/application.conf.example conf/application.conf
+# NOTE: comment out line 403 of conf/application.conf
+play evolutions:apply --%development
+
+# start server
+./bin/start_core.sh --%development
+
