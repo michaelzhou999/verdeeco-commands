@@ -1,5 +1,5 @@
 # additional packages
-sudo apt-get install -y kupfer gnome-tweak-tool
+sudo apt-get install -y kupfer gnome-tweak-tool chromium-browser
 
 # linuxconfig
 cd 
