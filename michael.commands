@@ -1,0 +1,10 @@
+# additional packages
+sudo apt-get install kupfer
+
+# linuxconfig
+cd 
+git clone git@bitbucket.org:michaelzhou/linuxconfig.git
+
+# eclipse luna 4.4
+
+
