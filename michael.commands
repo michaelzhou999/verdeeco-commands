@@ -14,4 +14,7 @@ sudo apt-get autoremove
 # add alias to ~/.bash_aliases
 alias v='cd /opt/verdeeco/sys/core/current '
 
+# generate eclipse project files
+cd /opt/verdeeco/sys/core/current
+play eclipsify
 
