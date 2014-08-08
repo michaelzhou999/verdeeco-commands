@@ -1,10 +1,17 @@
 # additional packages
-sudo apt-get install kupfer
+sudo apt-get install -y kupfer gnome-tweak-tool
 
 # linuxconfig
 cd 
 git clone git@bitbucket.org:michaelzhou/linuxconfig.git
 
 # eclipse luna 4.4
+sudo apt-get remove eclipse
+sudo apt-get autoremove
+# unzip the tar file and set path in .bash_env
+# install dark ui theme and fix the style issue
+
+# add alias to ~/.bash_aliases
+alias v='cd /opt/verdeeco/sys/core/current '
 
 
