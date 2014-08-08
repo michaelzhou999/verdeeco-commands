@@ -7,7 +7,7 @@ sudo add-apt-repository ppa:chris-lea/node.js
 
 # required packages
 sudo apt-get update
-sudo apt-get install -y tree vim vim-gtk unzip curl git-core g++ make python-software-properties python openjdk-7-jdk postgresql-9.1 mongodb-10gen rabbitmq-server nodejs
+sudo apt-get install -y tree vim vim-gtk unzip curl git-core g++ make python-software-properties python openjdk-7-jdk postgresql-9.1 mongodb-10gen rabbitmq-server nodejs s3cmd eclipse
 
 # install play framework under /opt/verdeeco directory
 sudo mkdir -p /opt/verdeeco/3rd
@@ -25,6 +25,19 @@ sudo mkdir -p /opt/verdeeco/var/data
 # change verdeeco directory permission
 sudo chown -R vagrant:vagrant /opt/verdeeco
 
+# configure s3cmd
+# keys can be found at https://github.com/verdeeco/core/wiki/Adding-data-to-dev-DB
+s3cmd --configure
+
+# populate initial data
+cd /opt/verdeeco/var/data
+mkdir error incoming processed tmp
+s3cmd get s3://verdeeco.utility.talquin/archive/archive_201407200500.zip
+unzip archive_201407200500.zip
+s3cmd get s3://verdeeco.utility.talquin/processed/Talquin_IntervalReport_201439240839.csv
+mv Tal* incoming
+rm archive_201407200500.zip
+
 # database
 sudo sed -i 's/peer/trust/g' /etc/postgresql/9.1/main/pg_hba.conf
 sudo service postgresql restart
@@ -35,3 +48,4 @@ chmod 600 /home/vagrant/.pgpass
 
 # environmental variable
 echo "source /opt/verdeeco/sys/core/current/etc/verdeeco.env &>/dev/null" >> /home/vagrant/.bashrc
+
